@@ -12,11 +12,11 @@ import hu.adam_toth1.jdbi.JdbiRegisterApplication.usermanagement.repository.User
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
+        User user = repository.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }

@@ -16,7 +16,7 @@ import hu.adam_toth1.jdbi.JdbiRegisterApplication.usermanagement.repository.User
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @GetMapping("")
     public String viewHomePage() {
@@ -34,13 +34,13 @@ public class UserController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        userRepository.save(user);
+        repository.save(user);
         return "register_success";
     }
 
     @GetMapping("/list_users")
     public String viewUsersList(Model model) {
-        List<User> users = userRepository.findAll();
+        List<User> users = repository.findAll();
         model.addAttribute("listUsers", users);
         return "users";
     }
